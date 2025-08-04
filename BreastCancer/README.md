@@ -50,5 +50,6 @@ Bu proje, **Support Vector Machine (SVM)** algoritması ile meme kanseri teşhis
 
 > (Not: Karar sınırı grafiği sadece 2 boyutlu veri ile çizilebildiği için, PCA veya seçilmiş iki özellik üzerinden çizilmiştir.)
 
-![Karar Sınırı](images/decision_boundary_pca.jpeg)
+![Karar Sınırı](images/decision_boundary_pca.png)
+
 
