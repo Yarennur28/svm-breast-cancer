@@ -32,7 +32,7 @@ Bu proje, **Support Vector Machine (SVM)** algoritması ile meme kanseri teşhis
 - Eğitim (Train), Doğrulama (Validation) ve Test veri setlerinde performans sonuçları
 - Eğitim süreci ekran çıktısı aşağıda yer almaktadır:
 
-![Kütüphanesiz SVM Performans](images/svm_scratch_results.jpeg)
+![Kütüphanesiz SVM Performans](BreastCancer/images/svm_scratch_results.jpeg)
 
 ---
 
@@ -40,16 +40,16 @@ Bu proje, **Support Vector Machine (SVM)** algoritması ile meme kanseri teşhis
 - `sklearn.svm.SVC` ile implementasyon
 - Özellik ölçekleme (`StandardScaler`)
 
-![Kütüphaneli SVM Performans](images/svm_sklearn_results.jpeg)
+![Kütüphaneli SVM Performans](BreastCancer/images/svm_sklearn_results.jpeg)
 
 - **Test verisi için karmaşıklık matrisi**:
 
-![Karmaşıklık Matrisi](images/confusion_matrix.jpeg)
+![Karmaşıklık Matrisi](BreastCancer/images/confusion_matrix.jpeg)
 
 - **Karar Sınırı Grafiği**:
 
 > (Not: Karar sınırı grafiği sadece 2 boyutlu veri ile çizilebildiği için, PCA veya seçilmiş iki özellik üzerinden çizilmiştir.)
 
-![Karar Sınırı](images/decision_boundary_pca.png)
+![Karar Sınırı](BreastCancer/images/decision_boundary_pca.png)
 
 
