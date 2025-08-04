@@ -40,7 +40,7 @@ Bu proje, **Support Vector Machine (SVM)** algoritması ile meme kanseri teşhis
 - `sklearn.svm.SVC` ile implementasyon
 - Özellik ölçekleme (`StandardScaler`)
 
-![Kütüphaneli SVM Performans](images/svm_scratch_results.jpeg)
+![Kütüphaneli SVM Performans](images/svm_sklearn_results.jpeg)
 
 - **Test verisi için karmaşıklık matrisi**:
 
