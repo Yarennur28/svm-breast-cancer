@@ -9,6 +9,7 @@ from sklearn.decomposition import PCA
 from sklearn.metrics import accuracy_score, f1_score, confusion_matrix
 from sklearn.model_selection import train_test_split
 
+
 def load_data(filepath):
     with open(filepath, 'r') as file:
         reader = csv.reader(file)
@@ -22,6 +23,7 @@ def load_data(filepath):
             data.append((id_val, features, label))
     return data
 
+
 def split_data(data, train_ratio=0.7, val_ratio=0.15):
     random.shuffle(data)
     total = len(data)
@@ -32,12 +34,21 @@ def split_data(data, train_ratio=0.7, val_ratio=0.15):
     test_data = data[val_end:]
     return train_data, val_data, test_data
 
+
 def prepare_features_labels(data, num_features=None):
+    """
+    Veriden id, özellik vektörü ve etiket listelerini ayırır.
+
+    :param data: Girdi veri kümesi (liste)
+    :param num_features: İsteğe bağlı olarak kullanılacak özellik sayısı
+    :return: ids, X (np.array), y (np.array)
+    """
     ids = [id_val for id_val, _, _ in data]
     X = [features[:num_features] if num_features else features for _, features, _ in data]
     y = [label for _, _, label in data]
     #y = [1 if label == 1 else -1 for _, _, label in data] 
     return ids, np.array(X), np.array(y)
+
 
 def evaluate_model(ids, y_true, y_pred, output_path=None):
     acc = accuracy_score(y_true, y_pred)
@@ -51,7 +62,15 @@ def evaluate_model(ids, y_true, y_pred, output_path=None):
             for id_val, true, pred in zip(ids, y_true, y_pred):
                 writer.writerow([id_val, true, pred])
 
+
 def plot_confusion_matrix(y_true, y_pred):
+    """
+    Karmaşıklık matrisini (confusion matrix) çizer.
+
+    :param y_true: Gerçek etiketler
+    :param y_pred: Tahmin edilen etiketler
+    :return:
+    """
     cm = confusion_matrix(y_true, y_pred, labels=[1, -1])
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
                 xticklabels=['1 (Malignant)', '-1 (Benign)'],
@@ -61,7 +80,18 @@ def plot_confusion_matrix(y_true, y_pred):
     plt.title('Confusion Matrix (Test Set)')
     plt.show()
 
+
 def plot_decision_boundary(model, X, y, title="Decision Boundary", save_path=None):
+    """
+    2B PCA uzayında karar sınırını ve veri noktalarını görselleştirir.
+
+    :param model: Eğitilmiş SVM modeli
+    :param X: 2B PCA özellikleri
+    :param y: Etiketler
+    :param title: Grafik başlığı
+    :param save_path: (Opsiyonel) Görselin kaydedileceği dosya yolu
+    :return: None
+    """
     h = .02
     x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
     y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
@@ -75,8 +105,10 @@ def plot_decision_boundary(model, X, y, title="Decision Boundary", save_path=Non
 
     class_1 = y == 1
     class_neg1 = y == -1
-    plt.scatter(X[class_1, 0], X[class_1, 1], c='red', label='Malignant (1)', edgecolors='k')
-    plt.scatter(X[class_neg1, 0], X[class_neg1, 1], c='blue', label='Benign (-1)', edgecolors='k')
+    plt.scatter(X[class_1, 0], X[class_1, 1],
+                 c='red', label='Malignant (1)', edgecolors='k')
+    plt.scatter(X[class_neg1, 0], X[class_neg1, 1],
+                 c='blue', label='Benign (-1)', edgecolors='k')
 
 
     plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cm.coolwarm, edgecolors='k')
@@ -93,6 +125,7 @@ def plot_decision_boundary(model, X, y, title="Decision Boundary", save_path=Non
         print(f"Karar sınırı görseli kaydedildi: {save_path}")
 
     plt.show()
+
 
 if __name__ == "__main__":
     data = load_data("processed_data.csv")
